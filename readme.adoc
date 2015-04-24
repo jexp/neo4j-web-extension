@@ -26,6 +26,8 @@ echo 'org.neo4j.server.thirdparty_jaxrs_classes=extension.web=/popoto' >>  ~/Dow
 open http://localhost:7474/popoto
 ----
 
+image::popoto_in_neo_demo.jpg[]
+
 You can also download https://dl.dropboxusercontent.com/u/14493611/neo4j-web-extension-2.2-SNAPSHOT.jar[the JAR from here].
 
 === How does it work?
