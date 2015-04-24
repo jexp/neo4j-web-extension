@@ -1,0 +1,53 @@
+== Neo4j Server Extension for minimalistic Web-UI
+
+This is an Demo for an Extension for http://neo4j.com/download[Neo4j Server] that not only provides and endpoint that provides graph data
+but also exposes html, css, js and image files from a `resources/webapp` directory, contained in the jar.
+
+This can be used for small, self-containted demos, visualizations or proof of concept style applications, but not for real applications that should use Neo4j Server as a database backend server.
+
+=== The Demo: Popoto.js
+
+As my demo I provide a setup that exposes http://popotojs.com[popoto.js] automatcially on top of the data you have in your graph.
+
+The `StaticWebResource` provides the web-files of the visualization from the `resources/webapp` directory.
+And `PopotoResource` adds a second endpoint to provide a `config/config.js` which uses label, property and index information to provide the necessary config for popoto's visualization.
+
+*Note that you have to disable auth for this demo as I haven't added means for it to retrieve a username/password.*
+
+You can use the demo by cloning and building (`mvn clean install`) this repository.
+And then copy the resulting jar in the server's plugin directory.
+And edit `neo4j-server.properties` to register the package name with an endpoint.
+
+[source]
+----
+cp target/neo4j-web-extension-2.2-SNAPSHOT.jar ~/Downloads/neo4j-enterprise-2.2.1/plugins/
+echo 'org.neo4j.server.thirdparty_jaxrs_classes=extension.web=/popoto' >>  ~/Downloads/neo4j-enterprise-2.2.1/conf/neo4j-server.properties
+~/Downloads/neo4j-enterprise-2.2.1/bin/neo4j restart
+open http://localhost:7474/popoto
+----
+
+You can also download https://dl.dropboxusercontent.com/u/14493611/neo4j-web-extension-2.2-SNAPSHOT.jar[the JAR from here].
+
+=== How does it work?
+
+It is actually quite simple.
+This is the core idea of exposing static web resources under the mountpoint.
+
+[source,java]
+----
+@GET
+@Path("{file:(?i).+\\.(png|jpg|jpeg|svg|gif|html?|js|css|txt)}")
+public Response file(@PathParam("file") String file) throws IOException {
+    InputStream fileStream = findFileStream(file);
+    if (fileStream == null) return Response.status(Response.Status.NOT_FOUND).build();
+    else return Response.ok(fileStream, mediaType(file)).build();
+}
+
+private InputStream findFileStream(String file) throws IOException {
+    URL fileUrl = findFileUrl(file);
+    System.out.println("Find file " + file + " url " + fileUrl);
+    if (fileUrl==null) return null;
+    return fileUrl.openStream();
+}
+----
+

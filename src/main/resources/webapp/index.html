@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Popoto Search</title>
+    <link rel="stylesheet" href="css/popoto.min.css">
+</head>
+<body class="ppt-body">
+
+<header class="ppt-header">
+    <span class="ppt-header-span">POPOTO JS 0.0-&alpha;</span>
+</header>
+
+<section class="ppt-section-main">
+    <div class="ppt-section-header">
+        <span class="ppt-header-span">Graph</span> search
+    </div>
+
+    <div class="ppt-container-graph">
+        <nav id="popoto-taxonomy" class="ppt-taxo-nav">
+            <!-- Label/taxonomy filter will be generated here -->
+        </nav>
+        <div id="popoto-graph" class="ppt-div-graph">
+            <!-- Graph will be generated here-->
+        </div>
+    </div>
+
+    <div id="popoto-query" class="ppt-container-query">
+        <!-- Query viewer will be generated here -->
+    </div>
+
+    <!-- Cypher query viewer has been partially disabled for this alpha release and only display the query as text if enabled -->
+    <!--<div id="popoto-cypher" class="ppt-container-cypher">-->
+    <!--</div>-->
+
+    <div class="ppt-section-header">
+        <!-- The total results count is updated with a listener defined in app-template.js -->
+        RESULTS <span id="result-total-count" class="ppt-count"></span>
+    </div>
+
+    <div id="popoto-results" class="ppt-container-results">
+        <!-- Results will be generated here -->
+    </div>
+
+</section>
+
+<!---------------------->
+<!-- Required scripts -->
+
+<!-- Jquery is only used in popoto.js to send ajax POST request on Neo4j REST API -->
+<!-- This dependency will probably be removed in future releases -->
+<script src="js/jquery-2.1.0.min.js" charset="utf-8"></script>
+
+<script src="js/d3.v3.min.js" charset="utf-8"></script>
+<script src="js/popoto.min.js" charset="utf-8"></script>
+
+<!-- You can modify the parameters defined in this script to customize this application template -->
+<script src="config/config.js" charset="utf-8"></script>
+<script src="js/app-template.js" charset="utf-8"></script>
+</body>
+</html>
