@@ -9,6 +9,10 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 @Path("/")
 public class StaticWebResource {
@@ -20,6 +24,8 @@ public class StaticWebResource {
         return file("index.html");
     }
 
+    static Map<String,URL> resources = new ConcurrentHashMap<>();
+
     @GET
     @Path("{file:(?i).+\\.(png|jpg|jpeg|svg|gif|html?|js|css|txt)}")
     public Response file(@PathParam("file") String file) throws IOException {
@@ -29,10 +35,12 @@ public class StaticWebResource {
     }
 
     private InputStream findFileStream(String file) throws IOException {
-        URL fileUrl = findFileUrl(file);
-        System.out.println("Find file " + file + " url " + fileUrl);
-        if (fileUrl==null) return null;
-        return fileUrl.openStream();
+        URL fileUrl = resources.computeIfAbsent(file, new Function<String, URL>() {
+            public URL apply(String s) {
+                return findFileUrl(s);
+            }
+        });
+        return fileUrl == null ? null : fileUrl.openStream();
     }
 
     private URL findFileUrl(@PathParam("file") String file) {
