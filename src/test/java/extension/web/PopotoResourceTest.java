@@ -40,6 +40,7 @@ public class PopotoResourceTest {
         assertEquals(true, content.contains("/db/data/transaction/commit';"));
         assertEquals(true, content.contains("\"Movie\":"));
         assertEquals(true, content.contains("\"constraintAttribute\":\"name\""));
+        assertEquals(true, content.contains("\"resultOrderByAttribute\":\"name\""));
         assertEquals(true, content.contains("\"title\""));
         assertEquals(true, content.contains("\"name\",\"born\""));
     }
