@@ -74,6 +74,9 @@ public class PopotoResource {
                     }
                 }
                 nodes.close();
+                if(nodeMetaData.containsKey("constraintAttribute")){
+                    nodeMetaData.put("resultOrderByAttribute", nodeMetaData.get("constraintAttribute"));
+                }
                 nodeMetaData.put("returnAttributes", properties);
                 map.put(label.name(), nodeMetaData);
             }
