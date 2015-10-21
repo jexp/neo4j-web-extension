@@ -3,14 +3,14 @@
     <groupId>org.neo4j</groupId>
     <artifactId>neo4j-web-extension</artifactId>
     <packaging>jar</packaging>
-    <version>2.2-SNAPSHOT</version>
+    <version>2.3-SNAPSHOT</version>
     <name>Neo4j-Web</name>
     <description>Neo4j Web Extension</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <slf4j.version>1.6.1</slf4j.version>
-        <neo4j.version>2.2.1</neo4j.version>
-        <jersey.version>1.9</jersey.version>
+        <slf4j.version>1.7.6</slf4j.version>
+        <neo4j.version>2.3.0</neo4j.version>
+        <jersey.version>1.19</jersey.version>
     </properties>
 
     <repositories>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-jaxrs</artifactId>
-            <version>1.9.7</version>
+            <version>1.9.13</version>
         </dependency>
         <dependency>
             <groupId>org.neo4j</groupId>

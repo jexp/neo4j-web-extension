@@ -3,7 +3,7 @@ package extension.web;
 import org.junit.Rule;
 import org.junit.Test;
 import org.neo4j.harness.junit.Neo4jRule;
-import org.neo4j.test.Mute;
+//import org.neo4j.test.Mute;
 import org.neo4j.test.server.HTTP;
 
 import static java.util.Arrays.asList;
@@ -14,8 +14,8 @@ public class PopotoResourceTest {
 
 
     public static final String PERSON_NAME_INDEX = "create index on :Person(name)";
-    @Rule
-    public Mute mute = Mute.muteAll();
+    // @Rule
+    // public Mute mute = Mute.muteAll();
 
     @Rule
     public Neo4jRule server = new Neo4jRule()
